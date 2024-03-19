@@ -15,7 +15,9 @@ func NewServer(store *db.Store) *Server {
 	server := &Server{store: store}
 	router := gin.Default()
 
+	// User
 	router.POST("/api/createuser", server.createUser)
+	router.POST("/api/update/password", server.updateuserPassword)
 
 	server.router = router
 	return server
