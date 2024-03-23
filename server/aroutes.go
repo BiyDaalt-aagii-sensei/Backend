@@ -12,7 +12,7 @@ func (server *Server) routes() {
 	userRouter := router.Group("/api/user").Use(authMiddleware(server.token))
 	userRouter.POST("/password", server.updateuserPassword)
 
-	// Learning data
+	// Learning data.
 	datarouter := router.Group("/api/data").Use(authMiddleware(server.token))
 	datarouter.POST("/list-gender", server.listGender)
 	datarouter.GET("/count-gender", server.countGender)
