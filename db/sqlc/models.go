@@ -8,6 +8,33 @@ import (
 	"time"
 )
 
+type Datum struct {
+	Gender                       string `json:"gender"`
+	Age                          int32  `json:"age"`
+	InvestmentAvenues            string `json:"Investment_Avenues"`
+	MutualFunds                  int32  `json:"Mutual_Funds"`
+	EquityMarket                 int32  `json:"Equity_Market"`
+	Debentures                   int32  `json:"Debentures"`
+	GovernmentBonds              int32  `json:"Government_Bonds"`
+	FixedDeposits                int32  `json:"Fixed_Deposits"`
+	PPF                          int32  `json:"PPF"`
+	Gold                         int32  `json:"Gold"`
+	StockMarktet                 string `json:"Stock_Marktet"`
+	Factor                       string `json:"Factor"`
+	Objective                    string `json:"Objective"`
+	Purpose                      string `json:"Purpose"`
+	Duration                     string `json:"Duration"`
+	InvestMonitor                string `json:"Invest_Monitor"`
+	Expect                       string `json:"Expect"`
+	Avenue                       string `json:"Avenue"`
+	WhatAreYourSavingsObjectives string `json:"What are your savings objectives?"`
+	ReasonEquity                 string `json:"Reason_Equity"`
+	ReasonMutual                 string `json:"Reason_Mutual"`
+	ReasonBonds                  string `json:"Reason_Bonds"`
+	ReasonFD                     string `json:"Reason_FD"`
+	Source                       string `json:"Source"`
+}
+
 type User struct {
 	Id               int64     `json:"Id"`
 	Username         string    `json:"Username"`

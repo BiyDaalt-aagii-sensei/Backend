@@ -2,31 +2,40 @@ package server
 
 import (
 	db "bd/db/sqlc"
+	"bd/token"
+	"bd/utils"
+	"fmt"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Server struct {
+	config utils.Config
 	store  *db.Store
 	router *gin.Engine
+	token  token.Maker
 }
 
-func NewServer(store *db.Store) *Server {
-	server := &Server{store: store}
-	router := gin.Default()
+func NewServer(config utils.Config, store *db.Store) (*Server, error) {
+	token, err := token.NewPasetoMaker(config.TokenSymmetricKey)
+	if err != nil {
+		return nil, fmt.Errorf("Токен үүсгэж чадсангүй")
+	}
 
-	// User
-	router.POST("/api/createuser", server.createUser)
-	router.POST("/api/update/password", server.updateuserPassword)
+	server := &Server{
+		config: config,
+		store:  store,
+		token:  token,
+	}
 
-	server.router = router
-	return server
+	server.routes()
+	return server, nil
 }
 
 func (server *Server) StartServer(address string) error {
 	return server.router.Run(address)
 }
 
-func (server *Server) errResponse(err error) gin.H {
+func errResponse(err error) gin.H {
 	return gin.H{"error": err.Error()}
 }

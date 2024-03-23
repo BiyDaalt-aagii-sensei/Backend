@@ -21,10 +21,13 @@ func main() {
 		log.Fatalf("unable to connect db %v", err)
 	}
 	store := db.NewStore(conn)
-	server := server.NewServer(store)
-
+	server, err := server.NewServer(cnf, store)
+	if err != nil {
+		log.Fatalf("Сервис асааж чадсангүй")
+	}
 	err = server.StartServer(cnf.ServerAddress)
 	if err != nil {
 		log.Fatalf("cant start server err: %v", err)
 	}
+
 }
