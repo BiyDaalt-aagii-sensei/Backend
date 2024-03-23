@@ -7,7 +7,10 @@ func (server *Server) routes() {
 	// User
 	router.POST("/api/create/user", server.createUser)
 	router.POST("/api/login/user", server.loginUser)
-	router.POST("/api/update/password", server.updateuserPassword)
+
+	// User Update Request
+	userRouter := router.Group("/api/user").Use(authMiddleware(server.token))
+	userRouter.POST("/password", server.updateuserPassword)
 
 	// Learning data
 	datarouter := router.Group("/api/data").Use(authMiddleware(server.token))
