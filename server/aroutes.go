@@ -1,9 +1,14 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
 
 func (server *Server) routes() {
 	router := gin.Default()
+	router.Use(cors.Default())
+
 	// User
 	router.POST("/api/create/user", server.createUser)
 	router.POST("/api/login/user", server.loginUser)
